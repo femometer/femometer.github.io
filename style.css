@@ -1,6 +1,6 @@
 
 .oops {
-    max-width: 1000px;
+    max-width: 1500px;
     margin: auto;
 }
 h1 {
@@ -36,6 +36,19 @@ body {
     background-color: rgb(237, 243, 229);
 
 }
+.shopnow {
+    background-color: rgb(213, 223, 200);
+    padding: 15px;
+    text-decoration: none;
+    color: #2b2b35;
+    font-size: larger;
+}
+.shopnow:hover {
+    background-color: rgb(189, 204, 170);
+}
+.landingdesc {
+    margin-bottom: 50px;
+}
 .mainc {
     width: 80%;
     padding: 5%;
@@ -47,10 +60,11 @@ body {
 }
 .navbuttons a {
     line-height: 40px;
-    padding-left: 5px;  
-    padding-right: 5px;  
+    padding-left: 10px;  
+    padding-right: 10px;  
     float: left;
     text-decoration: none;
+    color: #2b2b35;
 }
 .navbuttons a:hover {
     background-color: rgb(235, 226, 219);
