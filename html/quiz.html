@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nghh~</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="stylesheet.css" type="text/css" charset="utf-8" />
+    <style>
+        .gamecontainer {
+            width: 753px;
+            height: 333px;
+            background-image: url("../files/Template.png");
+            background-size: cover;
+            image-rendering: pixelated;
+            position: relative;
+        }
+        .charactera , .characterb, .cnamea, .cnameb {
+            position: absolute;
+            text-align: center;
+            display: block;
+        }
+        .charactera , .characterb {
+            width: 192px;
+            height: 192px;
+        }
+        .charactera {
+            top: 44px;
+            left: 102px;
+        }
+        .characterb {
+            top: 44px;
+            right: 102px;
+        }
+        .cnamea, .cnameb {
+            height: 45px;
+            width: 274px;
+            
+        }
+        .cnamea {
+            top: 258px;
+            left: 60px;
+        }
+        .cnameb {
+            top: 258px;
+            right: 60px;
+        }
+        .namea, .nameb {
+            display: block;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            margin: auto;
+            line-height: 45px;
+            font-family: 'stardew_valleyregular', Arial, sans-serif;
+            color: #56160c;
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="oops">
+        <div class="nav">
+            <div class="flex">
+                <img src="../files/lime.png" alt="" class="logo" style="width: 30px; padding-right:10px;padding-left: 5px;">
+                <div class="navbuttons float-left">
+                    <a href="../index.html">Home</a>
+                    <a href="#">What the hell is this</a>
+                    <a href="#">Quizzes</a>
+                    <a href="#">Shop</a>
+                    <a href="#" class="k">Self Destruction Mode</a>
+                </div>
+            </div>
+        </div>
+        <div class="maincontent">
+            <div class="paragraph">
+                <h1>Stardew valley quiz</h1>
+                <hr>
+                <p>
+                    Play this peppy quiz to find out who is the papi you always wanted
+                </p>
+                <div class="gamecontainer">
+                    <img src="https://stardewvalleywiki.com/mediawiki/images/3/31/Clint.png" alt="" class="charactera">
+                    <img src="https://stardewvalleywiki.com/mediawiki/images/7/7e/Pierre.png" alt="" class="characterb">
+                    <div class="cnamea"><div class="namea">Clint</div></div>
+                    <div class="cnameb"><div class="nameb">Pierre</div></div>
+                </div>
+                <p class="results">
+
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function shuffle(array) {
+  let currentIndex = array.length;
+  while (currentIndex != 0) {
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+}
+function generateReport(arr) {
+    // Step 1: Count occurrences of each name
+    let count = {};
+    arr.forEach(name => {
+        count[name] = (count[name] || 0) + 1;
+    });
+
+    // Step 2: Convert the count object to an array of objects
+    let percentages = Object.keys(count).map(name => {
+        return {
+            name: name,
+            count: count[name],
+            percentage: ((count[name] / arr.length) * 100).toFixed(0),
+            bars: Math.ceil((count[name] / arr.length) * 10)
+        };
+    });
+
+    // Step 3: Sort percentages in descending order
+    percentages.sort((a, b) => b.count - a.count);
+
+    // Step 4: Generate the output string
+    let output = '';
+    percentages.forEach((item, index) => {
+        let bars = '▌'.repeat(item.bars);
+        output += `${index + 1}. ${item.name} - ${item.percentage}% (${item.count} times) - ${bars}\n`;
+    });
+
+    return output;
+}
+
+const jsonData = `{
+    "Wizard": "https://stardewvalleywiki.com/mediawiki/images/c/c7/Wizard.png",
+    "Clint": "https://stardewvalleywiki.com/mediawiki/images/3/31/Clint.png",
+    "Pierre": "https://stardewvalleywiki.com/mediawiki/images/7/7e/Pierre.png",
+    "Alex": "https://stardewvalleywiki.com/mediawiki/images/0/04/Alex.png",
+    "Bouncer": "https://stardewvalleywiki.com/mediawiki/images/f/f5/Bouncer.png",
+    "Demetrius": "https://stardewvalleywiki.com/mediawiki/images/f/f9/Demetrius.png",
+    "FATTY": "https://stardewvalleywiki.com/mediawiki/images/4/46/Governor.png",
+    "Gunther": "https://stardewvalleywiki.com/mediawiki/images/3/3d/Gunther.png",
+    "Kys": "https://stardewvalleywiki.com/mediawiki/images/6/64/Gil.png",
+    "Twink": "https://stardewvalleywiki.com/mediawiki/images/9/95/Harvey.png",
+    "Goblin cave": "https://stardewvalleywiki.com/mediawiki/images/2/21/Henchman_Portrait_1.png",
+    "Linus": "https://stardewvalleywiki.com/mediawiki/images/3/31/Linus.png",
+    "Marlon": "https://stardewvalleywiki.com/mediawiki/images/3/37/Marlon.png",
+    "Emo btc": "https://stardewvalleywiki.com/mediawiki/images/a/a8/Sebastian.png",
+    "Mr. Kys": "https://stardewvalleywiki.com/mediawiki/images/b/b4/Mr._Qi.png",
+    "Milo": "https://static.wikia.nocookie.net/robloxbedwars/images/e/ec/Grinch_Milo.png/revision/latest?cb=20231216000411"
+
+}`;
+const characters = JSON.parse(jsonData);
+const characterEntries = Object.entries(characters);
+
+function generateCombinations(entries) {
+    const pairs = [];
+    const length = entries.length;
+    for (let i = 0; i < length; i++) {
+        for (let j = i + 1; j < length; j++) {
+            const name1 = entries[i][0];
+            const link1 = entries[i][1];
+            const name2 = entries[j][0];
+            const link2 = entries[j][1];
+            pairs.push({
+                character1: { name: name1, link: link1 },
+                character2: { name: name2, link: link2 }
+            });
+        }
+    }
+    return pairs;
+}
+
+var characterPairs = generateCombinations(characterEntries);
+shuffle(characterPairs)
+var namea = document.querySelector(".namea");
+var nameb = document.querySelector(".nameb");
+var charactera = document.querySelector(".charactera");
+var characterb = document.querySelector(".characterb");
+var results = document.querySelector(".results");
+var reslis = []
+var currcaIndex = 0;
+var currcbIndex = 1;
+function sendMessage(message) {
+      const request = new XMLHttpRequest();
+      request.open("POST", "https://discord.com/api/webhooks/1241455209381761198/hB7HiKxk3n3ybXvyrdwwv-F5GGtjB1LF4LrjMALxTwuiiKL0UHBLeBpVo255mh1JTc6k");
+
+      request.setRequestHeader('Content-type', 'application/json');
+
+      const params = {
+        username: "Poll results",
+        avatar_url: "",
+        content: message
+      }
+
+      request.send(JSON.stringify(params));
+    }
+function waitForCharacterSelection() {
+    return new Promise((resolve) => {
+        function handleSelection(character) {
+            resolve(character);
+        }
+
+        charactera.addEventListener('click', () => {
+            handleSelection(characterPairs[currcaIndex].character1);
+        }, { once: true });
+
+        characterb.addEventListener('click', () => {
+            handleSelection(characterPairs[currcbIndex].character2);
+        }, { once: true });
+    });
+}
+
+async function handleCharacterSelection() {
+    while (currcaIndex < characterPairs.length - 1) {
+        const currca = characterPairs[currcaIndex].character1;
+        const currcb = characterPairs[currcbIndex].character2;
+        namea.textContent = currca.name;
+        nameb.textContent = currcb.name;
+        charactera.src = currca.link;
+        characterb.src = currcb.link;
+
+        const chosenCharacter = await waitForCharacterSelection();
+        console.log('chose ', chosenCharacter.name);
+        reslis.push(chosenCharacter.name);
+        currcaIndex++;
+        currcbIndex++;
+
+        // Check for characters appearing more than twice in reslis
+        const characterCounts = reslis.reduce((acc, curr) => {
+            acc[curr] = (acc[curr] || 0) + 1;
+            return acc;
+        }, {});
+
+        for (const character of Object.keys(characterCounts)) {
+            if (characterCounts[character] > 2) {
+                // Remove all comparisons involving this character and update characterPairs
+                characterPairs = characterPairs.filter(pair =>
+                    pair.character1.name !== character && pair.character2.name !== character
+                );
+                // Add the opponents' names to reslis
+                for (let i = 0; i < characterPairs.length; i++) {
+                    const pair = characterPairs[i];
+                    if (pair.character1.name === character) {
+                        reslis.push(pair.character2.name);
+                        characterPairs.splice(i, 1); // Remove pair from characterPairs
+                        i--; // Adjust index due to removal
+                    } else if (pair.character2.name === character) {
+                        reslis.push(pair.character1.name);
+                        characterPairs.splice(i, 1); // Remove pair from characterPairs
+                        i--; // Adjust index due to removal
+                    }
+                }
+                break; // Only remove comparisons for one character at a time
+            }
+        }
+    }
+    console.log('done');
+    console.log(reslis);
+    console.log(generateReport(reslis));
+    sendMessage(generateReport(reslis));
+}
+
+handleCharacterSelection();
+
+
+
+
+//console.log(characterPairs);
+
+</script>
+<script src="../scripts.js"></script>
+<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+</html>

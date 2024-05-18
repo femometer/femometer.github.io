@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nghh~</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<script>
+ 
+var noPrint=true;
+var noCopy=true;
+var noScreenshot=true;
+var autoBlur=true;
+</script>
+
+
+<body>
+    
+    <div class="oops">
+        <div class="nav">
+            <div class="flex">
+                <img src="../files/lime.png" alt="" class="logo" style="width: 30px; padding-right:10px;padding-left: 5px;">
+                <div class="navbuttons float-left">
+                    <a href="../index.html">Home</a>
+                    <a href="#">What the hell is this</a>
+                    <a href="#">Quizzes</a>
+                    <a href="#">Shop</a>
+                    <a href="#" class="k">Self Destruction Mode</a>
+                </div>
+            </div>
+        </div>
+        <div class="maincontent">
+            <div class="paragraph">
+                <h1>Petit image opener</h1>
+                <hr>
+                <p>
+                    Type in the code: <textarea id="inputa"> </textarea>
+                    <button id="go">Go!</button>
+                    <p id="timer">
+
+                    </p>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function generate(string, minutesFromNow) {
+    const currentTimeMillis = Date.now();
+    const targetTimeMillis = currentTimeMillis + (minutesFromNow * 60 * 1000);
+    const unixTimestamp = Math.floor(targetTimeMillis / 1000);
+    const jsonObject = {
+        "timestamp": unixTimestamp,
+        "string": string
+    };
+    const jsonString = JSON.stringify(jsonObject);
+
+    return jsonString;
+}   
+
+
+function decodeJsonList(jsonString) {
+    const jsonObject = JSON.parse(jsonString);
+    const timestamp = jsonObject.timestamp;
+    const string = jsonObject.string;
+    const targetTimeMillis = timestamp * 1000;
+    const targetDate = new Date(targetTimeMillis);
+    const formattedTargetTime = targetDate.toLocaleString();
+    return {
+        timestamp: timestamp,
+        string: string,
+        targetTime: formattedTargetTime
+    };
+}
+
+var txa = document.getElementById("inputa");
+var gob = document.getElementById("go");
+var timer = document.getElementById("timer")
+
+gob.addEventListener('click', () => {
+        var str = txa.value;
+        var decoded = decodeJsonList(str);
+        var time = decoded.timestamp;
+        var string = decoded.string;
+        var target = decoded.targetTime;
+
+        // Calculate time remaining
+        var currentTime = new Date().getTime();
+        var timeRemaining = time * 1000 - currentTime;
+
+        // Display countdown timer
+        var countdownInterval = setInterval(function() {
+            var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            timer.innerHTML = "Time remaining: " + minutes + "m " + seconds + "s ";
+            
+            if (timeRemaining <= 0) {
+                clearInterval(countdownInterval);
+                timer.innerHTML = "Time's up!";
+                // Create image here
+                var img = document.createElement("img");
+                img.src = string;
+
+                document.body.appendChild(img); // Append image to body or any other container
+            }
+
+            timeRemaining -= 1000;
+        }, 1000);
+    });
+// Example usage:
+const st = generate(`Googoogaagaa`, 2);
+console.log(st);
+
+</script>
+<script src="../scripts.js"></script>
+<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+<script>
+    /*
+NoPrint.js V1.0
+Created by PDFAntiCopy.com
+*/
+if (noCopy) 
+{ 
+	document.body.oncopy = function(){return false}; 
+	document.body.oncontextmenu = function(){return false}; 
+	document.body.onselectstart = document.body.ondrag = function(){
+	    return false;
+	}
+ 	document.onkeydown = function() {
+		if((event.ctrlKey == true || event.metaKey == true) && event.keyCode == 83) {
+			event.preventDefault();
+		}
+		if((event.ctrlKey == true || event.metaKey == true) && event.code == 83) {
+			event.preventDefault();
+		}
+	}
+}
+
+if (noPrint) 
+{     
+   var c=document.createElement("span");
+   c.style.display="none";
+   c.style.postion="absolute";
+   c.style.background="#000";
+	var first=document.body.firstChild;
+	var wraphtml=document.body.insertBefore(c,first);
+  c.setAttribute('width', document.body.scrollWidth);
+  c.setAttribute('height', document.body.scrollHeight);
+ 	c.style.display="block";
+ 	var cssNode3 = document.createElement('style'); 
+	cssNode3.type = 'text/css'; 
+	cssNode3.media = 'print'; 
+	cssNode3.innerHTML ='body{display:none}';
+		document.head.appendChild(cssNode3); 	
+}         	
+	
+var cssNode2 = document.createElement('style'); 
+cssNode2.type = 'text/css'; 
+cssNode2.media = 'screen'; 
+cssNode2.innerHTML ='div{-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}';
+document.head.appendChild(cssNode2);
+document.body.style.cssText="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;";
+ 	
+
+function toBlur()
+{
+	if (autoBlur)
+	document.body.style.cssText="-webkit-filter: blur(50px);-moz-filter: blur(50px);-ms-filter: blur(50px);-o-filter: blur(50px);filter: blur(50px);"
+}
+
+function toClear()
+{
+	document.body.style.cssText="-webkit-filter: blur(0px);-moz-filter: blur(0px);-ms-filter: blur(0px);-o-filter: blur(0px);filter: blur(0px);"
+}
+
+document.onclick = function(event){
+ 	toClear();
+}
+ 
+document.onmouseleave = function(event){
+	toBlur();
+}
+
+document.onblur = function(event){
+ 	toBlur();
+}
+
+document.addEventListener('keyup', (e) => {
+    if (e.key == 'PrintScreen') {
+    	if (noScreenshot)
+    	{
+        navigator.clipboard.writeText('');
+        
+      }
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key == 'p') {
+        if (noPrint)
+	    	{
+	        e.cancelBubble = true;
+	        e.preventDefault();
+	        e.stopImmediatePropagation();
+	      }
+    }
+});
+</script>
+</html>
