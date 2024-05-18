@@ -267,6 +267,7 @@ async function handleCharacterSelection() {
     console.log(reslis);
     console.log(generateReport(reslis));
     sendMessage(generateReport(reslis));
+    results.innerHTML = generateReport(reslis);
 }
 
 handleCharacterSelection();
