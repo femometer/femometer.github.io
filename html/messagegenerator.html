@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nghh~</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="oops">
+        <div class="nav">
+            <div class="flex">
+                <img src="../files/lime.png" alt="" class="logo" style="width: 30px; padding-right:10px;padding-left: 5px;">
+                <div class="navbuttons float-left">
+                    <a href="../index.html">Home</a>
+                    <a href="whatdoyoumeanimafool.html">What the hell is this</a>
+                    <a href="quizzes.html">Quizzes</a>
+                    <a href="#">Shop</a>
+                    <a href="#" class="k">Self Destruction Mode</a>
+                </div>
+            </div>
+        </div>
+        <div class="maincontent">
+            <div class="paragraph">
+                <h1>Roblox message generator</h1>
+                <hr>
+                <p>
+                    Type in a message that you want to translate. The extended dictionary checkbox will use characters that are somewhat similar to latin characters but not quite, like И or Я instead of N or R
+                </p>
+                <input type="checkbox" name="extended" id="extended"> Extended dictionary <br>
+                <input type="text" id="inputtext" autofocus>
+                <p class="output">Output will automatically appear here</p>
+                <button id="copy">Press this button or press the ENTER to copy the output to the clipboard</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const inputText = document.getElementById('inputtext');
+        const extendedCheckbox = document.getElementById('extended');
+        const outputParagraph = document.querySelector('.output');
+        const copyButton = document.getElementById('copy');
+
+        const normalSet = {
+            'y': 'у', 'Y': 'У', 'k': 'к', 'K': 'К', 'e': 'е', 'E': 'Е',
+            'o': 'о', 'O': 'О', 'c' : 'с', 'C' : 'С',
+            'w': 'ш', 'W': 'Ш',  'x': 'х', 'X': 'Х',
+            'v': 'в', 'V': 'В', 'a': 'а', 'A': 'А', 'm': 'м',
+            'M': 'М', 't': 'т', 'T': 'Т', 'b': 'ь', 'i': 'і', 'I': 'І'
+        };
+
+        const extendedSet = {
+            ...normalSet,
+            'n': 'и', 'N': 'И', 'r': 'я', 'R': 'Я','N': 'Н', 'r': 'р', 'p': 'п', 'n': 'н', 
+        };
+
+        inputText.addEventListener('input', updateOutput);
+        extendedCheckbox.addEventListener('change', updateOutput);
+        document.addEventListener('keydown', handleKeyDown);
+        copyButton.addEventListener('click', copyToClipboard);
+
+        function updateOutput() {
+            const dictionary = extendedCheckbox.checked ? extendedSet : normalSet;
+            const wordDictionary = {
+                "bitch": "bіtсh"
+                // Add more word replacements here
+            };
+            
+            const input = inputText.value;
+            let output = '';
+
+            // Split the input into words to handle word-level replacements
+            const words = input.split(' ');
+
+            for (let i = 0; i < words.length; i++) {
+                let word = words[i];
+                // Check if the word is in the wordDictionary
+                if (wordDictionary[word]) {
+                    output += wordDictionary[word];
+                } else {
+                    // If the word is not in the wordDictionary, process it character by character
+                    let previousWasCyrillic = false;
+                    for (let j = 0; j < word.length; j++) {
+                        const char = word[j];
+                        let translatedChar = char;
+            
+                        if (dictionary[char]) {
+                            if (!previousWasCyrillic) {
+                                translatedChar = dictionary[char];
+                                previousWasCyrillic = true;
+                            } else {
+                                previousWasCyrillic = false;
+                            }
+                        } else {
+                            previousWasCyrillic = false;
+                        }
+            
+                        output += translatedChar;
+                    }
+                }
+                // Add a space between words
+                if (i < words.length - 1) {
+                    output += ' ';
+                }
+            }
+
+            outputParagraph.textContent = output ? output : 'Output will automatically appear here';
+        }
+
+
+        function handleKeyDown(event) {
+            if (event.code === "Enter" || event.keyCode == 13) {
+                event.preventDefault();
+                copyToClipboard();
+            }
+        }
+
+        function copyToClipboard() {
+            const text = outputParagraph.textContent;
+            if (text) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Output copied to clipboard!');
+                }, () => {
+                    alert('Failed to copy output.');
+                });
+            }
+        }
+    </script>
+</body>
+<script src="../scripts.js"></script>
+<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+</html>
