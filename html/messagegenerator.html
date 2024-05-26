@@ -58,7 +58,7 @@
 
         const extendedSet = {
             ...normalSet,
-            'n': 'и', 'N': 'И', 'r': 'я', 'R': 'Я','N': 'Н', 'r': 'р', 'p': 'п', 'n': 'н', 
+            'n': 'и', 'N': 'И', 'r': 'я', 'R': 'Я','N': 'Н', 'r': 'р', 'n': 'н', 
         };
 
         inputText.addEventListener('input', updateOutput);
@@ -69,7 +69,50 @@
         function updateOutput() {
             const dictionary = extendedCheckbox.checked ? extendedSet : normalSet;
             const wordDictionary = {
-                "bitch": "bіtсh"
+                "bitch": "bіtсh",
+                "Bitch":"Bіtсh",
+                "BITCH": "BІTСH",
+                "horsecock":"hоrsесoсk",
+                "Horsecock":"Hоrsесoсk",
+                "HORSECOCK":"HОRSЕСOСK",
+                "twat":"twаt",
+                "Twat":"Twаt",
+                "TWAT":"TWАT",
+                "ass":"аss",
+                "Ass":"Аss",
+                "ASS":"АSS",
+                "cock":"cоck",
+                "Cock":"Cоck",
+                "COCK":"CОCK",
+                "pussy":"pцssу",
+                "Pussy":"Pцssу",
+                "PUSSY":"PЦSSУ",
+                "dildo":"dіldо",
+                "Dildo":"Dіldо",
+                "DILDO":"DІLDО",
+                "dick":"dіck",
+                "Dick":"Dіck",
+                "DICK":"DICK",
+                "cum":"сuм",
+                "Cum":"Сuм",
+                "CUM":"СUM",
+                "shit":"shіt",
+                "Shit":"Shіt",
+                "SHIT":"SHІT",
+                "kink":"kіnk",
+                "Kink":"Kіnk",
+                "KINK":"KІNK",
+                "fetish":"fеtіsh",
+                "Fetish":"Fеtіsh",
+                "FETISH":"FЕTІSH",
+                "vagina":"vаginа",
+                "Vagina":"Vаginа",
+                "VAGINA":"VАGINА",
+                "wanker":"wаnkеr",
+                "Wanker":"Wаnkеr",
+                "WANKER":"WАNKЕR",
+
+
                 // Add more word replacements here
             };
             
